@@ -1,0 +1,462 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap");
+
+body {
+	font-family: "Roboto Mono", serif;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	max-height: 100vh;
+	background-color: black; /* Initial color */
+	color: white; /* Default for black background */
+	overflow: hidden;
+}
+#app {
+	text-align: center;
+	max-width: 600px;
+}
+
+h1,
+h2 {
+	font-family: "Roboto Mono", serif;
+	font-style: bold;
+}
+
+button {
+	padding: 10px 20px;
+	margin: 10px;
+	font-size: 16px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+#welcome-screen {
+	display: flex; /* Use Flexbox for positioning */
+	flex-direction: column;
+	justify-content: center; /* Center vertically */
+	align-items: flex-end; /* Align to the left */
+	padding: 20px; /* Add some padding for spacing */
+	background-color: black;
+	height: 100vh;
+	width: 100%;
+	color: white;
+}
+
+#start-btn {
+	background-color: transparent;
+	color: white;
+	cursor: pointer;
+}
+
+.character-btn {
+	background-color: #28a745;
+	color: white;
+}
+
+.blackBg p {
+	color: white;
+}
+
+#oui {
+	background-color: #ffee84;
+	border-radius: 0;
+}
+
+#third-screen button {
+	position: absolute;
+	right: 10%;
+	background-color: transparent;
+	color: white;
+}
+
+#character-selection {
+	color: black; /* Ensure readability on white background */
+}
+
+#popup {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+}
+
+#popup-content {
+	background: black;
+	color: white;
+	padding: 20px;
+	border-radius: 10px;
+	text-align: center;
+	max-width: 450px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+#popup-yes,
+#popup-no {
+	background-color: #28a745;
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	font-size: 16px;
+	cursor: pointer;
+	border-radius: 5px;
+	margin: 10px;
+}
+
+#popup-no {
+	background-color: #dc3545;
+}
+
+#popup-continue {
+	background-color: transparent;
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	font-size: 16px;
+	cursor: pointer;
+	border-radius: 5px;
+	display: none;
+	margin-top: 20px;
+}
+
+/* Character Container */
+#characters {
+	display: flex;
+	justify-content: space-around; /* Space between character sections */
+	align-items: center;
+	margin-top: 20px;
+}
+
+/* Individual Character */
+.character {
+	display: flex;
+	flex-direction: column; /* Stack name and square vertically */
+	align-items: center; /* Center both elements horizontally */
+}
+
+/* Character Name */
+.character-name {
+	font-size: 16px;
+	font-weight: bold;
+	margin-bottom: 10px; /* Space between name and square */
+}
+
+/* Character Square */
+.character-square {
+	width: 100px;
+	height: 35vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #ddd; /* Placeholder background color */
+	color: black;
+	font-size: 14px;
+	font-weight: bold;
+	border: 2px solid #333;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+/* Hover Effect */
+.character-square:hover {
+	background-color: #bbb;
+	transform: scale(1.1);
+}
+
+/* Combat Screen */
+#combat-screen {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	height: 100vh;
+	background-color: white;
+	color: black;
+	padding: 20px;
+}
+
+#boss-info,
+#player-info {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#boss-image,
+#player-image {
+	width: 150px;
+	height: auto;
+	position: relative; /* Needed to stack elements properly */
+	z-index: 1; /* Lower z-index to allow dialogue to overlap */
+}
+
+#boss-name,
+#boss-health {
+	margin: 0px;
+}
+
+#boss-name,
+#player-name {
+	font-size: 18px;
+	font-weight: bold;
+	margin-top: 10px;
+}
+
+#boss-health,
+#player-health {
+	font-size: 16px;
+}
+
+#combat-dialogue {
+	position: absolute; /* Position relative to the parent container */
+	top: 50%; /* Adjust vertical placement */
+	left: 50%; /* Center horizontally */
+	transform: translate(-50%, -50%); /* Center alignment */
+	width: 150vh; /* Reduce width to fit inside the image */
+	background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+	border: 1px solid black;
+	padding: 10px;
+	text-align: center;
+	border-radius: 10px;
+	z-index: 10; /* Ensure it's above the boss image */
+	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+}
+
+#combat-continue {
+	background-color: transparent;
+	border: none;
+	padding: 10px 20px;
+	font-size: 16px;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+/* Player Info Styling */
+#player-info {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 35%;
+}
+
+#player-container {
+	position: relative; /* Allows positioning elements inside relative to the container */
+	width: 150px; /* Match the width of the image */
+	height: 150px; /* Match the height of the image */
+}
+
+#player-image {
+	width: auto;
+	height: 60%;
+}
+
+#player-details {
+	position: absolute; /* Position text over the image */
+	top: 31%; /* Center vertically */
+	left: 88%; /* Center horizontally */
+	transform: translate(-50%, -50%); /* Adjust position for centering */
+	text-align: center;
+	z-index: 15; /* Ensure it's on top of everything */
+	padding: 5px; /* Space around the text */
+	border-radius: 5px; /* Rounded edges for the text background */
+}
+
+#player-name {
+	font-size: 14px;
+	font-weight: bold;
+	margin: 0;
+}
+
+#player-health {
+	font-size: 12px;
+	margin: 0;
+}
+
+/* Attack Container */
+#attack-container {
+	position: absolute;
+	top: 7%;
+	left: 100%;
+	background: rgba(255, 255, 255, 0.9);
+	color: black;
+	border: 1px solid black;
+	padding: 10px 20px;
+	width: 250px;
+	border-radius: 10px;
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+	display: none;
+	flex-direction: column;
+	gap: 10px;
+}
+
+/* Attack Button */
+.attack {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+	border: 1px solid black;
+	border-radius: 5px;
+	cursor: pointer;
+	background-color: #f9f9f9;
+	transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.attack:hover {
+	background-color: #e0e0e0;
+	transform: scale(1.05);
+}
+
+.attack-name {
+	font-weight: bold;
+	font-size: 16px;
+}
+
+.attack-details {
+	font-size: 14px;
+	text-align: right;
+	display: flex; /* Use Flexbox for spacing */
+	justify-content: space-between; /* Space damage and delay */
+	gap: 10px; /* Add spacing between elements */
+	white-space: pre-line; /* Ensure line breaks are respected */
+	flex-direction: column; /* Stack details vertically */
+	align-items: flex-start; /* Align text to the left */
+}
+
+/* Tutorial Popup */
+#tutorial-popup {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+}
+
+#tutorial-content {
+	background: black;
+	color: white;
+	padding: 20px;
+	text-align: center;
+	max-width: 450px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+#start-attack {
+	background-color: white;
+	color: black;
+	border: none;
+	padding: 10px 20px;
+	font-size: 16px;
+	cursor: pointer;
+	border-radius: 5px;
+	margin-top: 20px;
+}
+
+/* Horizontal Shake Animation */
+@keyframes shake {
+	0% {
+		transform: translate(0, 0);
+	}
+	20% {
+		transform: translate(-10px, 0);
+	}
+	40% {
+		transform: translate(10px, 0);
+	}
+	60% {
+		transform: translate(-10px, 0);
+	}
+	80% {
+		transform: translate(10px, 0);
+	}
+	100% {
+		transform: translate(0, 0);
+	}
+}
+
+/* Vertical Shake Animation */
+@keyframes vertical-shake {
+	0% {
+		transform: translate(0, 0);
+	}
+	20% {
+		transform: translate(0, -10px);
+	}
+	40% {
+		transform: translate(0, 10px);
+	}
+	60% {
+		transform: translate(0, -10px);
+	}
+	80% {
+		transform: translate(0, 10px);
+	}
+	100% {
+		transform: translate(0, 0);
+	}
+}
+
+.shake {
+	animation: shake 0.5s ease-in-out;
+}
+
+.vertical-shake {
+	animation: vertical-shake 0.5s ease-in-out;
+}
+
+.attack.cooldown {
+	background-color: gray; /* Gray out the attack */
+	color: white; /* Adjust text color for visibility */
+	cursor: not-allowed; /* Show not-allowed cursor */
+	pointer-events: none; /* Disable click events */
+	opacity: 0.7; /* Make it slightly transparent */
+}
+
+#combat-popup {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+}
+
+#combat-popup-content {
+	background: black;
+	color: white;
+	padding: 20px;
+	border-radius: 10px;
+	text-align: center;
+	max-width: 450px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+#combat-popup-close {
+	background-color: white;
+	color: black;
+	border: none;
+	padding: 10px 20px;
+	font-size: 16px;
+	cursor: pointer;
+	border-radius: 5px;
+	margin-top: 20px;
+}

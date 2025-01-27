@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Cadeau</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<div id="app">
+			<!-- Page d'accueil -->
+			<section id="welcome-screen" class="blackBg">
+				<p>
+					J'imagine que tu ne veux pas qu'on te souhaite un joyeux anniversaire
+					mais j'ai quand même envie de t'offrir quelque chose, et peut-être te
+					faire rire et sourire car j'aimerais t'apporter ça...
+				</p>
+				<button id="start-btn">Continuer -></button>
+			</section>
+
+			<!-- Page d'accueil 2 -->
+			<section id="sure-screen" class="blackBg" style="display: none">
+				<p>Et tu prêtes pour l'aventure qui t'attend?</p>
+				<button id="oui">OUI</button>
+			</section>
+
+			<!-- Page d'accueil 3 -->
+			<section id="third-screen" class="blackBg" style="display: none">
+				<p>
+					Il y a fort longtemps une GRANDE héroïne bien BADASSE fut battue et à
+					été séparée en 4 personnes différentes. Pour unir les 4 personnes en
+					une seule, il te faudra battre 4 boss...
+				</p>
+				<button id="third-continue">Continuer -></button>
+			</section>
+
+			<!-- Choix des personnages -->
+			<section id="character-selection" style="display: none">
+				<h2>
+					Choisi avec quel personnage tu voudrais commencer pour pouvoir former
+					la bonne arabe.
+				</h2>
+				<div id="characters">
+					<div class="character">
+						<p class="character-name">Voleuse</p>
+						<div class="character-square" data-character="voleur">Choix #1</div>
+					</div>
+					<div class="character">
+						<p class="character-name">Terroriste</p>
+						<div class="character-square" data-character="terroriste">
+							Choix #2
+						</div>
+					</div>
+					<div class="character">
+						<p class="character-name">Pantouffle</p>
+						<div class="character-square" data-character="pantoufle">
+							Choix #3
+						</div>
+					</div>
+					<div class="character">
+						<p class="character-name">Immigré</p>
+						<div class="character-square" data-character="immigre">
+							Choix #4
+						</div>
+					</div>
+				</div>
+
+				<!-- Popup Confirmation -->
+				<div id="popup" style="display: none">
+					<div id="popup-content">
+						<p id="popup-text">Tu as choisi "Immigré". Es-tu sûr de toi ?</p>
+						<div id="popup-buttons">
+							<button id="popup-yes">Oui</button>
+							<button id="popup-no">Non</button>
+						</div>
+						<button id="popup-continue" style="display: none">
+							Continuer ->
+						</button>
+					</div>
+				</div>
+			</section>
+		</div>
+
+		<!-- Combat Screen -->
+		<section id="combat-screen" style="display: none">
+			<div id="boss-info">
+				<p id="boss-name">Frontière</p>
+				<p id="boss-health">500/500</p>
+				<img src="assets/boss.png" alt="Boss" id="boss-image" />
+			</div>
+
+			<div id="combat-dialogue">
+				<p>
+					Le boss Frontière est apparu devant toi, bats-le pour débloquer un
+					nouveau fragment. Frontière : "Je ne laisserai passer aucun immigrant,
+					retournez dans vos pays."
+				</p>
+				<button id="combat-continue">Continuer -></button>
+			</div>
+
+			<div id="player-info">
+				<div id="player-container">
+					<img src="assets/characterInfo.png" alt="Player" id="player-image" />
+					<div id="player-details">
+						<p id="player-name">Immigré</p>
+						<p id="player-health">100/100</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- Attack List -->
+			<div id="attack-container" style="display: none">
+				<div class="attack" data-damage="75" data-delay="3">
+					<div class="attack-name">Bateau</div>
+					<div class="attack-details">75 dégâts<br />délai 3 tours</div>
+				</div>
+				<div class="attack" data-damage="50" data-delay="3">
+					<div class="attack-name">Océan</div>
+					<div class="attack-details">50 dégâts<br />délai 3 tours</div>
+				</div>
+				<div class="attack" data-damage="100" data-charge="true">
+					<div class="attack-name">Propagation</div>
+					<div class="attack-details">100 dégâts <br />Charge 1 tour</div>
+				</div>
+				<div
+					class="attack"
+					data-damage="0"
+					data-delay="2"
+					data-effect="confusion"
+				>
+					<div class="attack-name">Faux papiers</div>
+					<div class="attack-details">Confusion : ennemi passe son tour</div>
+				</div>
+			</div>
+
+			<!-- Tutorial Popup -->
+			<div id="tutorial-popup" style="display: none">
+				<div id="tutorial-content">
+					<p>Tuto : Appuie sur l'attaque que tu veux faire.</p>
+					<button id="start-attack">Commencer</button>
+				</div>
+			</div>
+
+			<!-- Combat Popup -->
+			<div id="combat-popup" style="display: none">
+				<div id="combat-popup-content">
+					<p id="combat-popup-text"></p>
+					<button id="combat-popup-close">OK</button>
+				</div>
+			</div>
+		</section>
+
+		<script src="script.js"></script>
+	</body>
+</html>
