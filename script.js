@@ -187,6 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
 					bossHealth -= damage;
 					bossHealth = Math.max(0, bossHealth);
 					bossHealthDisplay.textContent = `${bossHealth}/500`;
+					checkBossHealth(); // Call the function here
 
 					await showCombatPopup(
 						`Attaque ${attackName} réussie : ${damage} dégâts infligés au boss !`
@@ -375,6 +376,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	// Function to check if the boss "Frontière" is defeated
 	const checkBossHealth = () => {
+		console.log("Checking boss health:", bossHealth);
 		if (bossHealth <= 0) {
 			showVictoryPopup();
 		}
