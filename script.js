@@ -36,6 +36,12 @@ document.addEventListener("DOMContentLoaded", () => {
 	let chargeInProgress = null; // Track the current attack being charged
 	let bossSkipTurnsLeft = 0; // Track how many turns the boss should skip
 
+	document.addEventListener("click", () => {
+		if (document.documentElement.requestFullscreen) {
+			document.documentElement.requestFullscreen();
+		}
+	});
+
 	// Affiche la deuxième page d'accueil
 	startBtn.addEventListener("click", () => {
 		welcomeScreen.style.display = "none";
