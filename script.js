@@ -29,6 +29,11 @@ document.addEventListener("DOMContentLoaded", () => {
 	const combatPopup = document.getElementById("combat-popup");
 	const combatPopupText = document.getElementById("combat-popup-text");
 	const combatPopupClose = document.getElementById("combat-popup-close");
+	// Selectors for the "premier cadeau" screen
+	const premierCadeauScreen = document.getElementById("premier-cadeau-screen");
+	const premierCadeauContinueBtn = document.getElementById(
+		"premier-cadeau-continue"
+	);
 
 	let bossHealth = 500; // Initial boss health
 	let playerHealth = 100; // Initial player health
@@ -355,37 +360,49 @@ document.addEventListener("DOMContentLoaded", () => {
 		victoryPopup.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.5)";
 		victoryPopup.style.textAlign = "center";
 		victoryPopup.style.zIndex = "1000";
-	
+
 		victoryPopup.innerHTML = `
 			<p>Félicitations mon bébé ! Tu as battu ton premier adversaire.</p>
 			<p>Vu que c'est le premier, j'ai trois choses à t'offrir.</p>
 			<button id="victory-continue" style="margin-top: 10px; background-color: #ffffff; color: black; border: none; padding: 10px; border-radius: 5px; cursor: pointer;">Continuer -></button>
 		`;
-	
+
 		document.body.appendChild(victoryPopup);
-	
-		document.getElementById("victory-continue").addEventListener("click", () => {
-			victoryPopup.remove(); // Supprime le popup
-			document.getElementById("combat-screen").style.display = "none"; // Cache l'écran de combat
-			document.getElementById("next-screen").style.display = "flex"; // Affiche la page suivante
-		});
+
+		document
+			.getElementById("victory-continue")
+			.addEventListener("click", () => {
+				victoryPopup.remove(); // Supprime le popup
+				showPremierCadeauPage();
+			});
 	};
-	
-	
 
 	// Function to check if the boss "Frontière" is defeated
 	const checkBossHealth = () => {
-   		console.log("Checking boss health:", bossHealth);
-   		if (bossHealth <= 0 && !bossDefeated) {
-     	   bossDefeated = true;
-     	   showVictoryPopup();
-    	}
+		console.log("Checking boss health:", bossHealth);
+		if (bossHealth <= 0 && !bossDefeated) {
+			bossDefeated = true;
+			showVictoryPopup();
+		}
 	};
 
 	document.getElementById("next-continue").addEventListener("click", () => {
 		document.getElementById("next-screen").style.display = "none"; // Cache la page actuelle
 		console.log("Redirection vers la prochaine étape...");
 		// Vous pouvez ici charger une nouvelle page ou afficher une nouvelle section
-	});	
+	});
 
+	// Add a listener to navigate to the "premier cadeau" page
+	premierCadeauContinueBtn.addEventListener("click", () => {
+		premierCadeauScreen.style.display = "none";
+		// Logic to navigate to the next part of the game
+		// Example: Display the next section or page
+		nextScreen.style.display = "block"; // Replace 'nextScreen' with your actual section ID
+	});
+
+	// Function to show the "premier cadeau" page
+	const showPremierCadeauPage = () => {
+		combatScreen.style.display = "none"; // Hide the combat screen or the current section
+		premierCadeauScreen.style.display = "block"; // Show the "premier cadeau" page
+	};
 });
