@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	const combatPopupText = document.getElementById("combat-popup-text");
 	const combatPopupClose = document.getElementById("combat-popup-close");
 	// Selectors for the "premier cadeau" screen
-	const premierCadeauScreen = document.getElementById("premier-cadeau-screen");
+	const premierCadeauScreen = document.getElementById("premier-cadeau");
 	const premierCadeauContinueBtn = document.getElementById(
 		"premier-cadeau-continue"
 	);
@@ -41,6 +41,10 @@ document.addEventListener("DOMContentLoaded", () => {
 	let chargeInProgress = null; // Track the current attack being charged
 	let bossSkipTurnsLeft = 0; // Track how many turns the boss should skip
 	let bossDefeated = false;
+	let policeHealth = 600;
+	let immigreHealth = 100;
+	let voleuseHealth = 100;
+	let currentPlayerTurn = "immigre"; // Tracks whose turn it is
 
 	document.addEventListener("click", () => {
 		if (document.documentElement.requestFullscreen) {
@@ -347,33 +351,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	// Function to display the victory popup when the boss "Frontière" is defeated
 	const showVictoryPopup = () => {
+		console.log("Displaying victory popup.");
 		const victoryPopup = document.createElement("div");
 		victoryPopup.id = "victory-popup";
-		victoryPopup.style.position = "absolute";
-		victoryPopup.style.top = "50%";
-		victoryPopup.style.left = "50%";
-		victoryPopup.style.transform = "translate(-50%, -50%)";
-		victoryPopup.style.backgroundColor = "black";
-		victoryPopup.style.color = "white";
-		victoryPopup.style.padding = "20px";
-		victoryPopup.style.borderRadius = "8px";
-		victoryPopup.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.5)";
-		victoryPopup.style.textAlign = "center";
-		victoryPopup.style.zIndex = "1000";
 
 		victoryPopup.innerHTML = `
-			<p>Félicitations mon bébé ! Tu as battu ton premier adversaire.</p>
-			<p>Vu que c'est le premier, j'ai trois choses à t'offrir.</p>
-			<button id="victory-continue" style="margin-top: 10px; background-color: #ffffff; color: black; border: none; padding: 10px; border-radius: 5px; cursor: pointer;">Continuer -></button>
-		`;
+		<p>Félicitations mon bébé ! Tu as battu ton premier adversaire.</p>
+		<p>Vu que c'est le premier, j'ai trois choses à t'offrir.</p>
+		<button id="victory-continue" style="margin-top: 10px; background-color: #ffffff; color: black; border: none; padding: 10px; border-radius: 5px; cursor: pointer;">Continuer -></button>
+	`;
 
 		document.body.appendChild(victoryPopup);
 
+		// Add event listener for "Continuer"
 		document
 			.getElementById("victory-continue")
 			.addEventListener("click", () => {
-				victoryPopup.remove(); // Supprime le popup
-				showPremierCadeauPage();
+				const victoryPopup = document.getElementById("victory-popup");
+				victoryPopup.style.display = "none"; // Hide the victory popup
+				showPremierCadeau(); // Show the "premier-cadeau" section
 			});
 	};
 
@@ -381,28 +377,143 @@ document.addEventListener("DOMContentLoaded", () => {
 	const checkBossHealth = () => {
 		console.log("Checking boss health:", bossHealth);
 		if (bossHealth <= 0 && !bossDefeated) {
+			console.log("Boss defeated. Triggering victory popup.");
 			bossDefeated = true;
 			showVictoryPopup();
 		}
 	};
 
-	document.getElementById("next-continue").addEventListener("click", () => {
-		document.getElementById("next-screen").style.display = "none"; // Cache la page actuelle
-		console.log("Redirection vers la prochaine étape...");
-		// Vous pouvez ici charger une nouvelle page ou afficher une nouvelle section
-	});
+	// Function to show the "Premier Cadeau" page
+	const showPremierCadeau = () => {
+		// Hide all sections
+		document.querySelectorAll("section").forEach((section) => {
+			section.style.display = "none";
+		});
 
-	// Add a listener to navigate to the "premier cadeau" page
-	premierCadeauContinueBtn.addEventListener("click", () => {
-		premierCadeauScreen.style.display = "none";
-		// Logic to navigate to the next part of the game
-		// Example: Display the next section or page
-		nextScreen.style.display = "block"; // Replace 'nextScreen' with your actual section ID
-	});
-
-	// Function to show the "premier cadeau" page
-	const showPremierCadeauPage = () => {
-		combatScreen.style.display = "none"; // Hide the combat screen or the current section
-		premierCadeauScreen.style.display = "block"; // Show the "premier cadeau" page
+		// Show the "premier-cadeau" section
+		const premierCadeauSection = document.getElementById("premier-cadeau");
+		premierCadeauSection.style.display = "flex";
 	};
+
+	// Function to show the "Tickets Section"
+	const showTicketsSection = () => {
+		// Hide all sections
+		document.querySelectorAll("section").forEach((section) => {
+			section.style.display = "none";
+		});
+
+		// Change the background color of the body
+		document.body.style.backgroundColor = "black";
+
+		// Show the tickets section
+		const ticketsSection = document.getElementById("tickets-section");
+		ticketsSection.style.display = "flex";
+	};
+
+	// Event listener for "Continuer" button in the "premier-cadeau" section
+	document
+		.getElementById("premier-cadeau-continue")
+		.addEventListener("click", () => {
+			showTicketsSection();
+		});
+
+	// Function to show the character unlock screen
+	const showCharacterUnlockScreen = () => {
+		// Hide all other sections
+		document.querySelectorAll("section").forEach((section) => {
+			section.style.display = "none";
+		});
+
+		// Show the character unlock screen
+		const characterUnlockScreen = document.getElementById(
+			"character-unlock-screen"
+		);
+		characterUnlockScreen.style.display = "flex";
+	};
+
+	// Add an event listener for the "Continue" button in the tickets section
+	document.getElementById("tickets-continue").addEventListener("click", () => {
+		showCharacterUnlockScreen();
+	});
+
+	const switchTurn = () => {
+		const immigreContainer = document.getElementById("immigre-container");
+		const voleuseContainer = document.getElementById("voleuse-container");
+
+		if (currentPlayerTurn === "immigre") {
+			currentPlayerTurn = "voleuse";
+			immigreContainer.classList.remove("active");
+			voleuseContainer.classList.add("active");
+		} else if (currentPlayerTurn === "voleuse") {
+			currentPlayerTurn = "boss";
+			voleuseContainer.classList.remove("active");
+			bossAttack();
+		} else {
+			currentPlayerTurn = "immigre";
+			immigreContainer.classList.add("active");
+		}
+	};
+
+	const bossAttackPolice = async () => {
+		const targets = [
+			{ name: "Immigré", health: immigreHealth, id: "immigre-health" },
+			{ name: "Voleuse", health: voleuseHealth, id: "voleuse-health" },
+		];
+
+		const target = targets[Math.floor(Math.random() * targets.length)];
+		const bossAttacks = [
+			{ name: "Pistolet", damage: 10 },
+			{ name: "Écrasement", damage: 10 },
+			{ name: "Menotte", damage: 0, effect: "confusion" },
+			{ name: "Tazeur", damage: 5 },
+		];
+
+		const attack = bossAttacks[Math.floor(Math.random() * bossAttacks.length)];
+
+		if (attack.effect === "confusion") {
+			await showCombatPopup(
+				`Le boss utilise ${attack.name}. ${target.name} est confus.`
+			);
+			// Handle confusion logic here
+		} else {
+			target.health -= attack.damage;
+			target.health = Math.max(0, target.health);
+			document.getElementById(target.id).textContent = `${target.health}/100`;
+			await showCombatPopup(
+				`Le boss utilise ${attack.name}. ${target.name} perd ${attack.damage} PV.`
+			);
+		}
+
+		switchTurn();
+	};
+
+	attacks.forEach((attack) => {
+		const character = attack.dataset.character;
+		attack.addEventListener("click", async () => {
+			if (currentPlayerTurn !== character) {
+				await showCombatPopup(`Ce n'est pas le tour de ${character}.`);
+				return;
+			}
+
+			const damage = parseInt(attack.dataset.damage, 10);
+			policeHealth -= damage;
+			policeHealth = Math.max(0, policeHealth);
+			document.getElementById(
+				"boss-health"
+			).textContent = `${policeHealth}/600`;
+
+			await showCombatPopup(
+				`${character} utilise ${
+					attack.querySelector(".attack-name").textContent
+				}. Le boss perd ${damage} PV.`
+			);
+
+			if (policeHealth === 0) {
+				await showCombatPopup("Le boss Police a été vaincu !");
+				// Transition to the next screen or end the game
+			}
+
+			switchTurn();
+		});
+	});
 });

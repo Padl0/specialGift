@@ -477,4 +477,145 @@ button {
 	margin-top: 20px;
 }
 
+#victory-popup {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: black;
+	color: white;
+	padding: 20px;
+	border-radius: 10px;
+	text-align: center;
+	z-index: 1000;
+}
+
 /*Premier cadeau*/
+#premier-cadeau {
+	display: none;
+	background-color: black;
+	color: white;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	padding: 20px;
+	animation: fadeIn 0.5s ease-in-out;
+}
+
+#premier-cadeau button {
+	margin-top: 20px;
+	background-color: transparent;
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	cursor: pointer;
+}
+
+/*Ticket*/
+#tickets-section {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	background-color: black; /* Ensures the section itself is black */
+	color: white;
+	font-family: Arial, sans-serif;
+}
+
+.tickets-content {
+	text-align: center;
+}
+
+.ticket {
+	background-color: white;
+	color: black;
+	margin: 10px;
+	padding: 15px;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	width: 300px;
+}
+
+.ticket h3 {
+	margin: 0;
+	font-size: 18px;
+}
+
+.ticket p {
+	margin: 5px 0;
+}
+
+.ticket em {
+	font-size: 14px;
+	color: gray;
+}
+
+#tickets-continue {
+	margin-top: 20px;
+	background: none;
+	color: white;
+	border: none;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+/*Voleuse débloquer*/
+#character-unlock-screen {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	background-color: black;
+	color: white;
+	font-family: Arial, sans-serif;
+	text-align: center;
+}
+
+.character-unlock-box {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.character-unlock-box img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+#character-unlock-continue {
+	margin-top: 20px;
+	background: none;
+	color: white;
+	border: none;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+/*Police combat*/
+#combat-police {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	height: 100vh;
+	background-color: white;
+	color: black;
+}
+
+.character-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+}
+
+.character-container.active {
+	transform: translateY(-20px); /* Highlight the current turn */
+}

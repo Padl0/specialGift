@@ -158,9 +158,9 @@
 		</section>
 
 		<!--Premier Cadeau-->
-		<section id="premier-cadeau-screen" style="display: none">
-			<div class="content-wrapper">
-				<p class="message">
+		<section id="premier-cadeau" style="display: none">
+			<div class="premier-cadeau-content">
+				<p>
 					Premièrement j'aimerais t'écrire que je t'aime profondément, je t'ai
 					déjà écrit une partie du pourquoi je t'aime mais je trouve que ce
 					n'est toujours pas assez. Julie tu es une personne tellement
@@ -169,9 +169,94 @@
 					dans mes bras quand j'en ai envie parce que je me sens tellement bien
 					avec toi, c'est fou. Je ne vais pas te bombarder ici par écrit sinon
 					c'est trop à lire et ça retire le côté humoristique. Rayane m'a
-					énormément aidé. Je t'aime.
+					énormément aidé pour l'histoire du jeu et Aïda pour les images. Je
+					t'aime.
 				</p>
-				<button id="premier-cadeau-continue">continuer -&gt;</button>
+				<button id="premier-cadeau-continue">Continuer -></button>
+			</div>
+		</section>
+
+		<!--Ticket-->
+		<section id="tickets-section" style="display: none">
+			<div class="tickets-content">
+				<div class="ticket">
+					<h3>Ticket #1</h3>
+					<p>Tu peux me demander ce que tu veux je le ferai.</p>
+					<em>Utilisable qu'une fois</em>
+				</div>
+				<div class="ticket">
+					<h3>Ticket #2</h3>
+					<p>Tu peux me demander ce que tu veux je le ferai.</p>
+					<em>Utilisable qu'une fois</em>
+				</div>
+				<button id="tickets-continue">Continuer -></button>
+			</div>
+		</section>
+
+		<!--Voleuse débloquer-->
+		<section id="character-unlock-screen" style="display: none">
+			<div class="character-unlock-content">
+				<div class="character-unlock-box">
+					<img src="assets/voleuseChoix.png" alt="voleuse choix" />
+				</div>
+				<div class="character-unlock-text">
+					<p>Tu as débloqué la voleuse ! :)</p>
+					<p>Continue comme ça. :D</p>
+				</div>
+				<button id="character-unlock-continue">continuer -></button>
+			</div>
+		</section>
+
+		<!--Combat Police-->
+		<section id="combat-police" style="display: none">
+			<div id="boss-info">
+				<h2 id="boss-name">Police</h2>
+				<p id="boss-health">600/600</p>
+				<div id="boss-image">BOSS</div>
+			</div>
+
+			<div id="player-info">
+				<div class="character-container" id="immigre-container">
+					<div class="character-info">
+						<p>Immigré</p>
+						<p id="immigre-health">100/100</p>
+					</div>
+				</div>
+				<div class="character-container" id="voleuse-container">
+					<div class="character-info">
+						<p>Voleuse</p>
+						<p id="voleuse-health">100/100</p>
+					</div>
+				</div>
+			</div>
+
+			<div id="attack-container">
+				<div
+					class="attack"
+					data-character="immigre"
+					data-damage="75"
+					data-delay="3"
+				>
+					<span class="attack-name">Racaille de la cité</span>
+					<span class="attack-details">75 dégâts, délai 3 tours</span>
+				</div>
+				<div class="attack" data-character="voleuse" data-damage="10">
+					<span class="attack-name">Crachat</span>
+					<span class="attack-details">10 dégâts</span>
+				</div>
+				<div class="attack" data-character="voleuse" data-damage="20">
+					<span class="attack-name">Insulte</span>
+					<span class="attack-details">20 dégâts</span>
+				</div>
+				<div
+					class="attack"
+					data-character="voleuse"
+					data-damage="50"
+					data-delay="2"
+				>
+					<span class="attack-name">Vole</span>
+					<span class="attack-details">50 dégâts, délai 2 tours</span>
+				</div>
 			</div>
 		</section>
 
