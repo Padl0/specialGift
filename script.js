@@ -35,6 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	const attackCooldowns = {};
 	let chargeInProgress = null; // Track the current attack being charged
 	let bossSkipTurnsLeft = 0; // Track how many turns the boss should skip
+	let bossDefeated = false;
 
 	document.addEventListener("click", () => {
 		if (document.documentElement.requestFullscreen) {
@@ -171,7 +172,6 @@ document.addEventListener("DOMContentLoaded", () => {
 				bossSkipTurnsLeft = 1; // Boss skips the current and next turn
 				await showCombatPopup(`${attackName} utilisé ! Le boss est confus.`);
 				attackCooldowns[attackName] = 3; // Apply cooldown for "Faux papiers"
-				updateAttackUI();
 
 				setTimeout(() => {
 					reduceCooldowns(); // Reduce player attack cooldowns
@@ -247,6 +247,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			bossHealth -= damage;
 			bossHealth = Math.max(0, bossHealth);
 			bossHealthDisplay.textContent = `${bossHealth}/500`;
+			checkBossHealth();
 
 			await showCombatPopup(
 				`Attaque ${attackName} réussie : ${damage} dégâts infligés au boss !`
@@ -298,6 +299,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		bossHealth -= damage;
 		bossHealth = Math.max(0, bossHealth);
 		bossHealthDisplay.textContent = `${bossHealth}/500`;
+		checkBossHealth();
 
 		await showCombatPopup(
 			`Attaque ${attackName} réussie : ${damage} dégâts infligés au boss !`
@@ -322,11 +324,6 @@ document.addEventListener("DOMContentLoaded", () => {
 		attackContainer.style.display = "block";
 	});
 
-	// Interval to decrement cooldowns and charges
-	setInterval(() => {
-		decrementCooldownsAndCharges();
-	}, 1000); // Update every second
-
 	const showCombatPopup = (message) => {
 		return new Promise((resolve) => {
 			combatPopupText.textContent = message; // Set the popup message
@@ -344,8 +341,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	});
 
 	// Function to display the victory popup when the boss "Frontière" is defeated
-	const showVictoryPopup = async () => {
-		// Create a popup dynamically
+	const showVictoryPopup = () => {
 		const victoryPopup = document.createElement("div");
 		victoryPopup.id = "victory-popup";
 		victoryPopup.style.position = "absolute";
@@ -359,43 +355,37 @@ document.addEventListener("DOMContentLoaded", () => {
 		victoryPopup.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.5)";
 		victoryPopup.style.textAlign = "center";
 		victoryPopup.style.zIndex = "1000";
-
-		// Add the congratulatory message
+	
 		victoryPopup.innerHTML = `
-        <p>Félicitations mon bébé ! Tu as battu ton premier adversaire.</p>
-        <p>Vu que c'est le premier, j'ai trois choses à t'offrir.</p>
-        <button id="victory-continue" style="margin-top: 10px; background-color: #ffffff; color: black; border: none; padding: 10px; border-radius: 5px; cursor: pointer;">Continuer -></button>
-    `;
-
-		// Append the popup to the body
+			<p>Félicitations mon bébé ! Tu as battu ton premier adversaire.</p>
+			<p>Vu que c'est le premier, j'ai trois choses à t'offrir.</p>
+			<button id="victory-continue" style="margin-top: 10px; background-color: #ffffff; color: black; border: none; padding: 10px; border-radius: 5px; cursor: pointer;">Continuer -></button>
+		`;
+	
 		document.body.appendChild(victoryPopup);
-
-		// Add an event listener to the continue button
-		const continueButton = document.getElementById("victory-continue");
-		continueButton.addEventListener("click", () => {
-			victoryPopup.style.display = "none";
-			// Logic to transition to the next part of the game
-			// Example: load the next combat or show a reward screen
-			loadNextStage();
+	
+		document.getElementById("victory-continue").addEventListener("click", () => {
+			victoryPopup.remove(); // Supprime le popup
+			document.getElementById("combat-screen").style.display = "none"; // Cache l'écran de combat
+			document.getElementById("next-screen").style.display = "flex"; // Affiche la page suivante
 		});
 	};
+	
+	
 
 	// Function to check if the boss "Frontière" is defeated
 	const checkBossHealth = () => {
-		console.log("Checking boss health:", bossHealth);
-		if (bossHealth <= 0) {
-			showVictoryPopup();
-		}
+   		console.log("Checking boss health:", bossHealth);
+   		if (bossHealth <= 0 && !bossDefeated) {
+     	   bossDefeated = true;
+     	   showVictoryPopup();
+    	}
 	};
 
-	// Call checkBossHealth in your player attack logic after bossHealth updates:
-	// Example:
-	// bossHealth -= damage;
-	// checkBossHealth();
+	document.getElementById("next-continue").addEventListener("click", () => {
+		document.getElementById("next-screen").style.display = "none"; // Cache la page actuelle
+		console.log("Redirection vers la prochaine étape...");
+		// Vous pouvez ici charger une nouvelle page ou afficher une nouvelle section
+	});	
 
-	// Placeholder function for transitioning to the next stage
-	const loadNextStage = () => {
-		console.log("Transitioning to the next stage...");
-		// Add your game logic here
-	};
 });

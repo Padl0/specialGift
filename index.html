@@ -48,24 +48,26 @@
 				<div id="characters">
 					<div class="character">
 						<p class="character-name">Voleuse</p>
-						<div class="character-square" data-character="voleur">Choix #1</div>
+						<div class="character-square" data-character="voleur">
+							<img src="assets/voleuseChoix.png" alt="" />
+						</div>
 					</div>
 					<div class="character">
 						<p class="character-name">Terroriste</p>
 						<div class="character-square" data-character="terroriste">
-							Choix #2
+							<img src="assets/terroristeChoix.png" alt="" />
 						</div>
 					</div>
 					<div class="character">
 						<p class="character-name">Pantouffle</p>
 						<div class="character-square" data-character="pantoufle">
-							Choix #3
+							<img src="assets/pentoufleChoix.png" alt="" />
 						</div>
 					</div>
 					<div class="character">
 						<p class="character-name">Immigré</p>
 						<div class="character-square" data-character="immigre">
-							Choix #4
+							<img src="assets/immigreChoix.png" alt="" />
 						</div>
 					</div>
 				</div>
@@ -91,7 +93,7 @@
 			<div id="boss-info">
 				<p id="boss-name">Frontière</p>
 				<p id="boss-health">500/500</p>
-				<img src="assets/boss.png" alt="Boss" id="boss-image" />
+				<img src="assets/frontiere.png" alt="Boss" id="boss-image" />
 			</div>
 
 			<div id="combat-dialogue">
@@ -105,7 +107,7 @@
 
 			<div id="player-info">
 				<div id="player-container">
-					<img src="assets/characterInfo.png" alt="Player" id="player-image" />
+					<img src="assets/immigre.png" alt="Player" id="player-image" />
 					<div id="player-details">
 						<p id="player-name">Immigré</p>
 						<p id="player-health">100/100</p>
@@ -153,6 +155,22 @@
 					<button id="combat-popup-close">OK</button>
 				</div>
 			</div>
+		</section>
+
+		<!--Premier Cadeau-->
+		<section id="next-screen" style="display: none" class="blackBg">
+			<p>
+				Premièrement j'aimerais t'écrire que je t'aime profondément, je t'ai
+				déjà écrit une partie du pourquoi je t'aime mais je trouve que ce n'est
+				toujours pas assez. Julie, tu es une personne tellement formidable que
+				les mots ne pourraient décrire ce que je perçois en toi. Je t'aime
+				tellement, c'est fou. J'aurais aimé pouvoir te prendre dans mes bras
+				quand j'en ai envie parce que je me sens tellement bien avec toi, c'est
+				fou. Je ne vais pas te bombarder ici par écrit sinon c'est trop à lire
+				et ça retire le côté humoristique. Rayane m'a énormément aidé. Je
+				t'aime.
+			</p>
+			<button id="next-continue" style="margin-top: 20px">Continuer -></button>
 		</section>
 
 		<script src="script.js"></script>
