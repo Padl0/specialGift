@@ -403,7 +403,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 
 		// Change the background color of the body
-		document.body.style.backgroundColor = "black";
+		document.body.style.backgroundColor = "#310544";
 
 		// Show the tickets section
 		const ticketsSection = document.getElementById("tickets-section");
@@ -434,86 +434,5 @@ document.addEventListener("DOMContentLoaded", () => {
 	// Add an event listener for the "Continue" button in the tickets section
 	document.getElementById("tickets-continue").addEventListener("click", () => {
 		showCharacterUnlockScreen();
-	});
-
-	const switchTurn = () => {
-		const immigreContainer = document.getElementById("immigre-container");
-		const voleuseContainer = document.getElementById("voleuse-container");
-
-		if (currentPlayerTurn === "immigre") {
-			currentPlayerTurn = "voleuse";
-			immigreContainer.classList.remove("active");
-			voleuseContainer.classList.add("active");
-		} else if (currentPlayerTurn === "voleuse") {
-			currentPlayerTurn = "boss";
-			voleuseContainer.classList.remove("active");
-			bossAttack();
-		} else {
-			currentPlayerTurn = "immigre";
-			immigreContainer.classList.add("active");
-		}
-	};
-
-	const bossAttackPolice = async () => {
-		const targets = [
-			{ name: "Immigré", health: immigreHealth, id: "immigre-health" },
-			{ name: "Voleuse", health: voleuseHealth, id: "voleuse-health" },
-		];
-
-		const target = targets[Math.floor(Math.random() * targets.length)];
-		const bossAttacks = [
-			{ name: "Pistolet", damage: 10 },
-			{ name: "Écrasement", damage: 10 },
-			{ name: "Menotte", damage: 0, effect: "confusion" },
-			{ name: "Tazeur", damage: 5 },
-		];
-
-		const attack = bossAttacks[Math.floor(Math.random() * bossAttacks.length)];
-
-		if (attack.effect === "confusion") {
-			await showCombatPopup(
-				`Le boss utilise ${attack.name}. ${target.name} est confus.`
-			);
-			// Handle confusion logic here
-		} else {
-			target.health -= attack.damage;
-			target.health = Math.max(0, target.health);
-			document.getElementById(target.id).textContent = `${target.health}/100`;
-			await showCombatPopup(
-				`Le boss utilise ${attack.name}. ${target.name} perd ${attack.damage} PV.`
-			);
-		}
-
-		switchTurn();
-	};
-
-	attacks.forEach((attack) => {
-		const character = attack.dataset.character;
-		attack.addEventListener("click", async () => {
-			if (currentPlayerTurn !== character) {
-				await showCombatPopup(`Ce n'est pas le tour de ${character}.`);
-				return;
-			}
-
-			const damage = parseInt(attack.dataset.damage, 10);
-			policeHealth -= damage;
-			policeHealth = Math.max(0, policeHealth);
-			document.getElementById(
-				"boss-health"
-			).textContent = `${policeHealth}/600`;
-
-			await showCombatPopup(
-				`${character} utilise ${
-					attack.querySelector(".attack-name").textContent
-				}. Le boss perd ${damage} PV.`
-			);
-
-			if (policeHealth === 0) {
-				await showCombatPopup("Le boss Police a été vaincu !");
-				// Transition to the next screen or end the game
-			}
-
-			switchTurn();
-		});
 	});
 });

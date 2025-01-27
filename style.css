@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap");
 
 html,
 body {
@@ -18,7 +18,8 @@ body {
 	align-items: center;
 	height: 100vh;
 	max-height: 100vh;
-	background-color: black; /* Initial color */
+	background-color: #310544;
+	/* Initial color */
 	color: white; /* Default for black background */
 	overflow: hidden;
 }
@@ -48,7 +49,7 @@ button {
 	justify-content: center; /* Center vertically */
 	align-items: flex-end; /* Align to the left */
 	padding: 20px; /* Add some padding for spacing */
-	background-color: black;
+	background-color: #310544;
 	height: 100vh;
 	width: 100%;
 	color: white;
@@ -70,7 +71,8 @@ button {
 }
 
 #oui {
-	background-color: #ffee84;
+	background-color: #800e0e;
+	color: white;
 	border-radius: 0;
 }
 
@@ -153,9 +155,10 @@ button {
 
 /* Character Name */
 .character-name {
-	font-size: 16px;
-	font-weight: bold;
+	font-family: "Press Start 2P", serif;
+	font-size: 13px;
 	margin-bottom: 10px; /* Space between name and square */
+	color: #310544;
 }
 
 /* Character Square */
@@ -169,7 +172,7 @@ button {
 	color: black;
 	font-size: 14px;
 	font-weight: bold;
-	border: 2px solid #333;
+	border: 2px solid #310544;
 	border-radius: 5px;
 	cursor: pointer;
 	transition: transform 0.2s ease, background-color 0.2s ease;
@@ -493,7 +496,7 @@ button {
 /*Premier cadeau*/
 #premier-cadeau {
 	display: none;
-	background-color: black;
+	background-color: #310544;
 	color: white;
 	height: 100vh;
 	display: flex;
@@ -521,7 +524,8 @@ button {
 	align-items: center;
 	justify-content: center;
 	height: 100vh;
-	background-color: black; /* Ensures the section itself is black */
+	background-color: #310544;
+	/* Ensures the section itself is black */
 	color: white;
 	font-family: Arial, sans-serif;
 }
@@ -570,7 +574,7 @@ button {
 	align-items: center;
 	justify-content: center;
 	height: 100vh;
-	background-color: black;
+	background-color: #310544;
 	color: white;
 	font-family: Arial, sans-serif;
 	text-align: center;
@@ -595,27 +599,4 @@ button {
 	border: none;
 	font-size: 16px;
 	cursor: pointer;
-}
-
-/*Police combat*/
-#combat-police {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: space-between;
-	height: 100vh;
-	background-color: white;
-	color: black;
-}
-
-.character-container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	position: relative;
-}
-
-.character-container.active {
-	transform: translateY(-20px); /* Highlight the current turn */
 }
